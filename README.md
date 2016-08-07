@@ -2,6 +2,6 @@
 
 My electronic resume deployed to Netlify.
 
-You can view it [here](http://sethalexander.netlify.com).
+You can view it [here](https://sethalexander.netlify.com).
 
 ### *Seth Alexander*
