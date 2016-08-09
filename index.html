@@ -81,7 +81,6 @@
                     <li ><a href="#about" class="link-inpage">About</a></li>
                     <li ><a href="#resume" class="link-inpage">Resume</a></li>
                     <li ><a href="#portfolio" class="link-inpage">Portfolio</a></li>
-                    <li ><a href="#blog" class="link-inpage">Blog</a></li>
                     <li ><a href="#contact" id="contact-tab" class="link-inpage">Contact</a></li>
                   </ul>
                 </div>
@@ -249,7 +248,7 @@
                 <div class="desc">
                   <h5 class="text-uppercase color-dark text-bold">University of Nevada, Las Vegas</h5>
                   <p class="font-alt color-dark">Master of Hospitality Administration</p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  <p>I completed my Masters degree 100% online in less than 2 years. I learned how to effectively communicate and work cooperatively through mostly online interactions with professors and classmates. I established my own timelines for completing my work in an efficient and high quality manner. During this time I helped open Pinewood Social as a manager and my wife birthed my second child.</p>
                   <p class="font-alt color-dark">  2014-2015</p>
                 </div>
               </li>
@@ -259,7 +258,7 @@
                 <div class="desc">
                   <h5 class="text-uppercase color-dark text-bold">Belmont University</h5>
                   <p class="font-alt color-dark">Bachelor of Business Administration</p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  <p>I moved from New York City to Nashville to achieve my undergraduate degree.</p>
                   <p class="font-alt color-dark"> 2003-2007</p>
                 </div>
               </li>
@@ -273,7 +272,7 @@
             <div class="padding30 text-center">
               <a href="assets/sethAlexanderResume.pdf" class="btn btn-flat-line btn-default dark-font "><i class="fa fa-download"></i>  Download CV</a>
               <span class="space-inline-15 hidden-xs"></span>
-              <a href="#" class="btn btn-flat-line btn-default dark-font"><i class="fa fa-print"></i> Print CV</a>
+              <a href="#" class="btn btn-flat-line btn-default dark-font" onclick="printResume()"><i class="fa fa-print"></i> Print CV</a>
             </div>
           </div>
         </div><!-- END DOWNLOAD & PRVIEW BTN -->
@@ -648,5 +647,12 @@
     <!--=====================================================-->
     <!--configuration template-->
     <script src="assets/theme/js/theme.js"></script>
+    <!-- print resume in popup window -->
+    <script>
+    function printResume() {
+      w = window.open('assets/sethAlexanderResume.pdf');
+      w.print();
+    }
+    </script>
   </body>
 </html>
