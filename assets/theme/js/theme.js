@@ -12,11 +12,6 @@
     initLightBox();
     initTyped();
     initBtnFile();
-    initMap();
-    initHold();
-    initCaptcha();
-    initAjaxContactForm();
-    initAjaxUploader();
   });
 
 
@@ -33,135 +28,10 @@
     }
   });
 
-  //Run function When WIndow Resize
+  //Run function When Window Resize
   $(window).resize(function() {
     initParallax();
   });
-
-  // ajax contact form
-  function initAjaxContactForm() {
-    if ($('#contactForm, #hireForm').length > 0) {
-      $('#contactForm, #hireForm').validate();
-      $('#contactForm, #hireForm').submit(function() {
-        var el = $(this);
-        if (el.valid()) {
-          var params = $(this).serialize();
-          $.ajax({
-            type: 'POST',
-            data: params,
-            url: "php/sending_mail.php",
-            beforeSend: function() {
-              el.find('.preload-submit').removeClass('hidden');
-              el.find('.message-submit').addClass('hidden');
-            },
-            success: function(res) {
-              res = jQuery.parseJSON(res);
-              setTimeout(function() {
-                el.find('.preload-submit').addClass('hidden');
-                if (res.error === null) {
-                  el.trigger('reset');
-                  el.find('.message-submit').html(res.msg).removeClass('hidden');
-                } else {
-                  el.find('.message-submit').html(res.error).removeClass('hidden');
-                }
-              }, 1000)
-            }
-          });
-        }
-        return false;
-      });
-    }
-  }
-
-  // ajax Uploader file
-  function initAjaxUploader() {
-    if ($('#upload-btn').length > 0) {
-
-    var btn = document.getElementById('upload-btn'),
-            wrap = document.getElementById('pic-progress-wrap'),
-            picBox = document.getElementById('picbox'),
-            errBox = document.getElementById('errormsg');
-
-    var uploader = new ss.SimpleUpload({
-      button: btn,
-      url: 'php/upload.php',
-      progressUrl: 'assets/plugins/Simple-Ajax-Uploader/extras/uploadProgress.php',
-      name: 'fileatt',
-      multiple: false,
-      maxUploads: 2,
-      maxSize: 200,
-      queue: false,
-      allowedExtensions: ['pdf'],
-      debug: true,       hoverClass: 'btn-hover',
-      focusClass: 'active',
-      disabledClass: 'disabled',
-      responseType: 'json',
-      onSubmit: function(filename, ext) {
-        var prog = document.createElement('div'),
-                outer = document.createElement('div'),
-                bar = document.createElement('div'),
-                size = document.createElement('div'),
-                self = this;
-        prog.className = 'prog';
-        size.className = 'size';
-        outer.className = 'progress';
-        bar.className = 'bar';
-
-        outer.appendChild(bar);
-        prog.appendChild(size);
-        prog.appendChild(outer);
-        wrap.appendChild(prog); // 'wrap' is an element on the page
-
-        self.setProgressBar(bar);
-        self.setProgressContainer(prog);
-        self.setFileSizeBox(size);
-
-        errBox.innerHTML = '';
-      },
-      onSizeError: function(filename, fileSize) {
-        errBox.innerHTML = 'Max size 200K';
-      },
-      onExtError: function(filename, extension) {
-        errBox.innerHTML = "File extension not permitted";
-      },
-      onError: function(filename, errorType, status, statusText, response, uploadBtn) {
-        errBox.innerHTML = statusText;
-      },
-      onComplete: function(file, response) {
-        if (!response) {
-          errBox.innerHTML = 'Unable to upload file';
-        }
-        if (response.success === true) {
-          picBox.innerHTML = '<i class="fa fa-file-pdf-o"></i> &nbsp;' + response.file;
-          $('#file-att').val(response.file);
-        } else {
-          if (response.msg) {
-            errBox.innerHTML = response.msg;
-          } else {
-            errBox.innerHTML = 'Unable to upload file';
-          }
-        }
-      }
-    });
-    }
-  }
-
-  //captcha configuration
-  function initCaptcha() {
-    $('#mycaptcha').simpleCaptcha({
-      allowRefresh: false,
-      scriptPath: "assets/plugins/simpleCaptcha/simpleCaptcha.php"
-    });
-
-    $('#mycaptcha').bind('ready.simpleCaptcha', function(hashSelected) {
-      $('#captcha1,#captcha2').html($('#mycaptcha-wrap').html()).find('.mycaptcha1').removeAttr('id');
-      $('#captcha1,#captcha2').find('.captchaImages img.captchaImage').click(function() {
-        $('#captcha1,#captcha2').find('.captchaImages img.captchaImage').removeClass('simpleCaptchaSelected');
-        $(this).addClass('simpleCaptchaSelected');
-        $('.simpleCaptchaInput').val($(this).data('hash'));
-      });
-    });
-  }
 
   //Typed Animation
   function initTyped() {
@@ -245,7 +115,7 @@
     });
   }
 
-  //Click Envents
+  //Click Events
   function initClickedEvents() {
     $('#hireme-tab').click(function() {
       $('#myTab a[href="#tab1"]').tab('show');
@@ -325,44 +195,12 @@
     }
   }
 
-  //Map
-  function initMap() {
-    $('#map-contact').gmap({
-      'center': '36.1672464, -86.6064691',
-      'zoom': 12,
-      scrollwheel: false,
-      'disableDefaultUI': false,
-      'callback': function() {
-        var self = this;
-        self.addMarker({
-          'position': this.get('map').getCenter(),
-          icon: 'assets/theme/images/marker.png'
-        }).click(function() {
-          self.openInfoWindow({
-            'content': $('.map-contact-body').html()
-          }, this);
-        });
-      }
-    });
-  }
-
-  function initHold() {
-    $('[data-holdwidth]').each(function(index, el) {
-      var width = $(el).data('holdwidth');
-      $(el).css('width', width);
-    });
-    $('[data-holdbg]').each(function(index, el) {
-      var bg = $(el).data('holdbg');
-      $(el).css('background-image', 'url(' + bg + ')');
-    });
-  }
-
   //Tooltip Bootrapt
   function initTooltip() {
     $('[data-toggle="tooltip"]').tooltip();
   }
 
-  //Tigger Custom Btn FIle
+  //Tigger Custom Btn File
   function initBtnFile() {
     $(document).on('change', '.btn-file :file', function() {
       var input = $(this),
